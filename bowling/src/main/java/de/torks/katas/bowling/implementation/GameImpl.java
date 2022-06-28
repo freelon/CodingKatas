@@ -31,7 +31,12 @@ public class GameImpl implements Game {
 
     private void updatePastFrame() {
 
+        if (!frames.isEmpty()) {
 
+            ModifiableFrame lastFrame = frames.remove(frames.size() - 1);
+            StandardFrame updatedLastFrame = lastFrame.withScoreFromNext(current);
+            frames.add(updatedLastFrame);
+        }
     }
 
     private void finishFrameIfFull() {

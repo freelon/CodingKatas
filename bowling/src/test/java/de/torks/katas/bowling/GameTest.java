@@ -4,8 +4,9 @@ import de.torks.katas.bowling.core.Game;
 import de.torks.katas.bowling.implementation.GameImpl;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
 
@@ -45,5 +46,22 @@ public class GameTest {
         assertEquals(10, game.frames().size());
 
         assertThrows(IllegalStateException.class, () -> game.addRoll(0));
+    }
+
+    @Test
+    void completeGame() {
+
+        List<Integer> rolls = List.of(1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6);
+        List<Integer> scoreAfterRoll = List.of(1, 5, 9, 14, 20, 24, 34, 39, 59, 59, 61, 68, 71, 83, 87, 107, 111, 127, 133);
+
+        Game game = new GameImpl();
+        for (int i = 0; i < rolls.size(); i++) {
+
+            assertFalse(game.isOver());
+            game.addRoll(rolls.get(i));
+            assertEquals(scoreAfterRoll.get(i), game.totalScore());
+        }
+
+        assertTrue(game.isOver());
     }
 }

@@ -11,4 +11,9 @@ public interface ModifiableFrame extends Frame {
     int firstTwoRollPins();
 
     boolean isFull();
+
+    default StandardFrame withScoreFromNext(ModifiableFrame next) {
+
+        throw new UnsupportedOperationException("not implemented");
+    }
 }

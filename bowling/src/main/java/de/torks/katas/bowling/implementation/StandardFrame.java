@@ -29,8 +29,6 @@ public record StandardFrame(List<Integer> pinsRolled, int scoreFromNext) impleme
     @Override
     public int firstTwoRollPins() {
 
-        checkFrameIsFullWhenReadingFullScore();
-
         return pinsRolled.stream().mapToInt(i -> i).sum();
     }
 
@@ -38,12 +36,6 @@ public record StandardFrame(List<Integer> pinsRolled, int scoreFromNext) impleme
     public boolean isFull() {
 
         return isStrike() || pinsRolled.size() == FRAME_SIZE;
-    }
-
-    private void checkFrameIsFullWhenReadingFullScore() {
-
-        if (!isFull())
-            throw new IllegalStateException("The frame has only %d rolls and is not a strike, so the full score cannot be computed".formatted(pinsRolled.size()));
     }
 
     private void checkAnotherRollCanBeAdded() {
@@ -86,7 +78,7 @@ public record StandardFrame(List<Integer> pinsRolled, int scoreFromNext) impleme
     private void checkFrameIsFullBeforeAddingScoreFromNext() {
 
         if (!isFull())
-            throw new IllegalStateException("Can only calculate add score from next frame if this frame is full, but it has %d instead of %d rolls and is no stirke.".formatted(pinsRolled.size(), FRAME_SIZE));
+            throw new IllegalStateException("Can only calculate add score from next frame if this frame is full, but it has %d instead of %d rolls and is no strike.".formatted(pinsRolled.size(), FRAME_SIZE));
     }
 
     @Override

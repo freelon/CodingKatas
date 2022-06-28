@@ -29,9 +29,12 @@ public record FinalFrame(List<Integer> pinsRolled) implements ModifiableFrame {
     @Override
     public int firstTwoRollPins() {
 
-        checkTwoRollsAreDone();
-
-        return pinsRolled.get(0) + pinsRolled.get(1);
+        if (pinsRolled.isEmpty())
+            return 0;
+        if (pinsRolled.size() == 1)
+            return pinsRolled.get(0);
+        else
+            return pinsRolled.get(0) + pinsRolled.get(1);
     }
 
     @Override
@@ -47,12 +50,6 @@ public record FinalFrame(List<Integer> pinsRolled) implements ModifiableFrame {
 
         int sum = pinsRolled.get(0) + pinsRolled.get(1);
         return sum < 10;
-    }
-
-    private void checkTwoRollsAreDone() {
-
-        if (pinsRolled.size() < 2)
-            throw new IllegalStateException("Only %d of 2 rolls are registered in the frame".formatted(pinsRolled.size()));
     }
 
     private void checkAnotherRollCanBeAdded() {
