@@ -1,0 +1,7 @@
+= CodingKatas
+
+I'll put one or more coding katas here.
+
+== Katas
+
+* `bowling`: https://ccd-school.de/coding-dojo/class-katas/bowling/[Bowling Kata]
