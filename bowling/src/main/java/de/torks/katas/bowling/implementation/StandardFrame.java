@@ -85,8 +85,8 @@ public record StandardFrame(List<Integer> pinsRolled, int scoreFromNext) impleme
 
     private void checkFrameIsFullBeforeAddingScoreFromNext() {
 
-        if (pinsRolled.size() != FRAME_SIZE)
-            throw new IllegalStateException("Can only calculate add score from next frame if this frame is full, but it has %d instead of %d rolls.".formatted(pinsRolled.size(), FRAME_SIZE));
+        if (!isFull())
+            throw new IllegalStateException("Can only calculate add score from next frame if this frame is full, but it has %d instead of %d rolls and is no stirke.".formatted(pinsRolled.size(), FRAME_SIZE));
     }
 
     @Override

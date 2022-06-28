@@ -2,7 +2,11 @@ package de.torks.katas.bowling;
 
 import de.torks.katas.bowling.core.Game;
 import de.torks.katas.bowling.implementation.GameImpl;
+import de.torks.katas.bowling.implementation.ModifiableFrame;
+import de.torks.katas.bowling.implementation.StandardFrame;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -31,5 +35,43 @@ public class ScoreTest {
         game.addRoll(6);
         assertEquals(11, game.totalScore());
         assertEquals(1, game.frames().size());
+    }
+
+    @Test
+    void testThreeThrows() {
+
+        Game game = new GameImpl();
+        game.addRoll(5);
+        game.addRoll(6);
+        game.addRoll(7);
+        assertEquals(18, game.totalScore());
+        assertEquals(1, game.frames().size());
+    }
+
+    @Test
+    void testNextFrameScoreWithStrike() {
+
+        StandardFrame frame = new StandardFrame(List.of(10), 0);
+        ModifiableFrame nextFrame = new StandardFrame(List.of(4, 4), 0);
+        int scoreFromNextFrame = frame.withScoreFromNext(nextFrame).scoreFromNext();
+        assertEquals(8, scoreFromNextFrame);
+    }
+
+    @Test
+    void testNextFrameScoreWithSpare() {
+
+        StandardFrame frame = new StandardFrame(List.of(9, 1), 0);
+        ModifiableFrame nextFrame = new StandardFrame(List.of(4, 4), 0);
+        int scoreFromNextFrame = frame.withScoreFromNext(nextFrame).scoreFromNext();
+        assertEquals(4, scoreFromNextFrame);
+    }
+
+    @Test
+    void testNoNextFrameScore() {
+
+        StandardFrame frame = new StandardFrame(List.of(9, 0), 0);
+        ModifiableFrame nextFrame = new StandardFrame(List.of(4, 4), 0);
+        int scoreFromNextFrame = frame.withScoreFromNext(nextFrame).scoreFromNext();
+        assertEquals(0, scoreFromNextFrame);
     }
 }
