@@ -37,7 +37,16 @@ public record FinalFrame(List<Integer> pinsRolled) implements ModifiableFrame {
     @Override
     public boolean isFull() {
 
-        return pinsRolled.size() == FRAME_SIZE || (pinsRolled.size() == 2 && pinsRolled.contains(10));
+        return pinsRolled.size() == FRAME_SIZE || firstTwoRolledAndNotASpare();
+    }
+
+    private boolean firstTwoRolledAndNotASpare() {
+
+        if (pinsRolled.size() < 2)
+            return false;
+
+        int sum = pinsRolled.get(0) + pinsRolled.get(1);
+        return sum < 10;
     }
 
     private void checkTwoRollsAreDone() {

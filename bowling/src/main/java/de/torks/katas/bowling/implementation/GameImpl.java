@@ -9,16 +9,29 @@ import java.util.List;
 public class GameImpl implements Game {
 
     private static final int GAME_LENGTH = 10;
-    private final List<StandardFrame> frames = new ArrayList<>(GAME_LENGTH);
-    private StandardFrame current;
+    private final List<ModifiableFrame> frames = new ArrayList<>(GAME_LENGTH);
+    private ModifiableFrame current;
 
     @Override
     public void addRoll(int pins) {
 
+        checkGameNotOver();
+
         initializeFrame();
         addRollToFrame(pins);
-        //updatePastFrame();
+        updatePastFrame();
         finishFrameIfFull();
+    }
+
+    private void checkGameNotOver() {
+
+        if (isOver())
+            throw new IllegalStateException("Cannot add rolls to a game that is over.");
+    }
+
+    private void updatePastFrame() {
+
+
     }
 
     private void finishFrameIfFull() {
@@ -39,7 +52,10 @@ public class GameImpl implements Game {
 
         if (current == null) {
 
-            current = new StandardFrame(List.of(), 0);
+            if (frames.size() < GAME_LENGTH - 1)
+                current = new StandardFrame(List.of(), 0);
+            else if (frames.size() == GAME_LENGTH - 1)
+                current = new FinalFrame(List.of());
         }
     }
 
