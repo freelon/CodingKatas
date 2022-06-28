@@ -9,8 +9,14 @@ import java.util.List;
 public class GameImpl implements Game {
 
     private static final int GAME_LENGTH = 10;
+    private final FrameFactory frameFactory;
     private final List<ModifiableFrame> frames = new ArrayList<>(GAME_LENGTH);
     private ModifiableFrame current;
+
+    public GameImpl(FrameFactory frameFactory) {
+
+        this.frameFactory = frameFactory;
+    }
 
     @Override
     public void addRoll(int pins) {
@@ -58,9 +64,9 @@ public class GameImpl implements Game {
         if (current == null) {
 
             if (frames.size() < GAME_LENGTH - 1)
-                current = new StandardFrame(List.of(), 0);
+                current = frameFactory.createStandardFrame();
             else if (frames.size() == GAME_LENGTH - 1)
-                current = new FinalFrame(List.of());
+                current = frameFactory.createFinalFrame();
         }
     }
 

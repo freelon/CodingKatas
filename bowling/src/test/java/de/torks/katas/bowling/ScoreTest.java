@@ -2,7 +2,6 @@ package de.torks.katas.bowling;
 
 import de.torks.katas.bowling.core.Game;
 import de.torks.katas.bowling.implementation.FinalFrame;
-import de.torks.katas.bowling.implementation.GameImpl;
 import de.torks.katas.bowling.implementation.ModifiableFrame;
 import de.torks.katas.bowling.implementation.StandardFrame;
 import org.junit.jupiter.api.Test;
@@ -16,14 +15,14 @@ public class ScoreTest {
     @Test
     void testInitial() {
 
-        Game game = new GameImpl();
+        Game game = GameFactory.createGame();
         assertEquals(0, game.totalScore());
     }
 
     @Test
     void testSingleThrow() {
 
-        Game game = new GameImpl();
+        Game game = GameFactory.createGame();
         game.addRoll(5);
         assertEquals(5, game.totalScore());
     }
@@ -31,7 +30,7 @@ public class ScoreTest {
     @Test
     void testTwoThrows() {
 
-        Game game = new GameImpl();
+        Game game = GameFactory.createGame();
         game.addRoll(5);
         game.addRoll(6);
         assertEquals(11, game.totalScore());
@@ -41,7 +40,7 @@ public class ScoreTest {
     @Test
     void testThreeThrows() {
 
-        Game game = new GameImpl();
+        Game game = GameFactory.createGame();
         game.addRoll(5);
         game.addRoll(6);
         game.addRoll(7);
