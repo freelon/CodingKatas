@@ -27,7 +27,7 @@ public record StandardFrame(List<Integer> pinsRolled, int scoreFromNext) impleme
     }
 
     @Override
-    public int allRollPins() {
+    public int firstTwoRollPins() {
 
         checkFrameIsFullWhenReadingFullScore();
 
@@ -66,7 +66,7 @@ public record StandardFrame(List<Integer> pinsRolled, int scoreFromNext) impleme
     private int computeAdditionalScoreFromNext(ModifiableFrame next) {
 
         if (isStrike())
-            return next.allRollPins();
+            return next.firstTwoRollPins();
         else if (isSpare())
             return next.firstRollPins();
         else

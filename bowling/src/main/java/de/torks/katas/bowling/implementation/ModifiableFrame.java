@@ -4,11 +4,11 @@ import de.torks.katas.bowling.core.Frame;
 
 public interface ModifiableFrame extends Frame {
 
-    StandardFrame withNextRoll(int pins);
+    ModifiableFrame withNextRoll(int pins);
 
     int firstRollPins();
 
-    int allRollPins();
+    int firstTwoRollPins();
 
     boolean isFull();
 }
