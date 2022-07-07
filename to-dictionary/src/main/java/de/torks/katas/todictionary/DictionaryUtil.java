@@ -10,6 +10,8 @@ public class DictionaryUtil {
         if (splitIndex >= 0) {
 
             String left = input.substring(0, splitIndex);
+            if (left.isEmpty())
+                throw new IllegalArgumentException("'%s' doesn't contain a key".formatted(input));
             String right = input.substring(splitIndex + 1);
             return Map.of(left, right);
         }
