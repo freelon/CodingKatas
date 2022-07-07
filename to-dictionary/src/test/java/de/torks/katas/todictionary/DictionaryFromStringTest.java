@@ -43,4 +43,10 @@ public class DictionaryFromStringTest {
 
         assertEquals(Map.of("a", "1", "b", "2", "c", "3"), DictionaryUtil.toDictionary("a=1;;b=2;;;;c=3"));
     }
+
+    @Test
+    void testNonEmptyAndNoSeparator() {
+
+        assertThrows(IllegalArgumentException.class, () -> DictionaryUtil.toDictionary(" "));
+    }
 }

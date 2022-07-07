@@ -17,18 +17,18 @@ public class DictionaryUtil {
 
     private static Optional<Pair> parseKeyValuePair(String input) {
 
-        int splitIndex = input.indexOf("=");
-        if (splitIndex < 0) {
-
+        if (input.isEmpty())
             return Optional.empty();
-        } else {
 
-            String left = input.substring(0, splitIndex);
-            if (left.isEmpty())
-                throw new IllegalArgumentException("'%s' doesn't contain a key".formatted(input));
-            String right = input.substring(splitIndex + 1);
-            return Optional.of(new Pair(left, right));
-        }
+        int splitIndex = input.indexOf("=");
+        if (splitIndex < 0)
+            throw new IllegalArgumentException("'%s' doesn't contain to '=' separator".formatted(input));
+
+        String left = input.substring(0, splitIndex);
+        if (left.isEmpty())
+            throw new IllegalArgumentException("'%s' doesn't contain a key".formatted(input));
+        String right = input.substring(splitIndex + 1);
+        return Optional.of(new Pair(left, right));
     }
 
     record Pair(String key, String value) {
