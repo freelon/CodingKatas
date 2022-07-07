@@ -1,8 +1,9 @@
 package de.torks.katas.todictionary;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class DictionaryUtil {
 
@@ -10,14 +11,11 @@ public class DictionaryUtil {
 
         return Arrays.stream(input.split(";"))
                 .map(DictionaryUtil::parseKeyValuePair)
-                .reduce(new HashMap<>(), (acc, it) -> {
-                    var result = new HashMap<>(acc);
-                    result.putAll(it);
-                    return result;
-                });
+                .flatMap(Optional::stream)
+                .collect(Collectors.toUnmodifiableMap(Pair::key, Pair::value));
     }
 
-    private static Map<String, String> parseKeyValuePair(String input) {
+    private static Optional<Pair> parseKeyValuePair(String input) {
 
         int splitIndex = input.indexOf("=");
         if (splitIndex >= 0) {
@@ -26,9 +24,12 @@ public class DictionaryUtil {
             if (left.isEmpty())
                 throw new IllegalArgumentException("'%s' doesn't contain a key".formatted(input));
             String right = input.substring(splitIndex + 1);
-            return Map.of(left, right);
+            return Optional.of(new Pair(left, right));
         }
 
-        return Map.of();
+        return Optional.empty();
+    }
+
+    record Pair(String key, String value) {
     }
 }
