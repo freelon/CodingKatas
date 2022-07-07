@@ -31,4 +31,10 @@ public class DictionaryFromStringTest {
 
         assertThrows(IllegalArgumentException.class, () -> DictionaryUtil.toDictionary("=123"));
     }
+
+    @Test
+    void testMultiple() {
+
+        assertEquals(Map.of("a", "1", "b", "2", "c", "3"), DictionaryUtil.toDictionary("a=1;b=2;c=3"));
+    }
 }
