@@ -4,4 +4,5 @@ I'll put one or more coding katas here.
 
 == Katas
 
+* `to-dictionary`: https://ccd-school.de/coding-dojo/function-katas/todictionary/[ToDictionary]
 * `bowling`: https://ccd-school.de/coding-dojo/class-katas/bowling/[Bowling Kata]
