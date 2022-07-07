@@ -18,7 +18,10 @@ public class DictionaryUtil {
     private static Optional<Pair> parseKeyValuePair(String input) {
 
         int splitIndex = input.indexOf("=");
-        if (splitIndex >= 0) {
+        if (splitIndex < 0) {
+
+            return Optional.empty();
+        } else {
 
             String left = input.substring(0, splitIndex);
             if (left.isEmpty())
@@ -26,8 +29,6 @@ public class DictionaryUtil {
             String right = input.substring(splitIndex + 1);
             return Optional.of(new Pair(left, right));
         }
-
-        return Optional.empty();
     }
 
     record Pair(String key, String value) {
