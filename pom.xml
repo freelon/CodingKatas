@@ -11,6 +11,7 @@
     <modules>
         <module>bowling</module>
         <module>to-dictionary</module>
+        <module>hangman</module>
     </modules>
 
     <properties>
