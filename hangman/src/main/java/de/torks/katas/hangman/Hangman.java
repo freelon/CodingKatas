@@ -10,7 +10,6 @@ public class Hangman {
     private final Set<Character> guessed = new HashSet<>();
 
     public Hangman(String word) {
-
         this.word = word;
     }
 
