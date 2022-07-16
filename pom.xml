@@ -12,6 +12,7 @@
         <module>bowling</module>
         <module>to-dictionary</module>
         <module>hangman</module>
+        <module>core</module>
     </modules>
 
     <properties>
@@ -20,6 +21,21 @@
 
         <record-builder.version>33</record-builder.version>
     </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
 
     <dependencyManagement>
         <dependencies>
